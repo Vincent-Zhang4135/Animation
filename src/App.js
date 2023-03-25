@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { Canvas } from "@react-three/fiber";
+import Item from './Item';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <header className="App-header">
+            <Canvas>
+                <pointLight position={[10, 10, 10]} />
+                <Item position={[-1.2, 0, 0]} />
+                <Item position={[1.2, 0, 0]} />
+            </Canvas>
+        </header>
+    );
 }
 
 export default App;
