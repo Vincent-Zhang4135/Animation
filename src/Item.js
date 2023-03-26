@@ -1,8 +1,6 @@
 import React, { useRef, useState } from "react";
-import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
-import { TeapotGeometry } from "three/examples/jsm/geometries/TeapotGeometry";
 
 const Item = (props) => {
     // This reference gives us direct access to the THREE.Mesh object
@@ -11,9 +9,8 @@ const Item = (props) => {
     const [hovered, hover] = useState(false);
     const [clicked, click] = useState(false);
     // Subscribe this component to the render-loop, rotate the mesh every frame
-    useFrame((state, delta) => (ref.current.rotation.x += 0.01));
+    useFrame((state, delta) => (ref.current.rotation.x = ref.current.rotation.y += 0.01))
     // Return the view, these are regular Threejs elements expressed in JSX
-    const teapotGeometry = new TeapotGeometry(100, 55);
 
     return (
         <mesh
@@ -24,14 +21,13 @@ const Item = (props) => {
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
         >
-            <Html>
-                <teapotGeometry />
-            </Html>
-            <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial
+            <boxGeometry args={[.5, .5, .5]} />
+            {/* <boxGeometry attach="geometry"/> */}
+            {/* <meshStandardMaterial
                 wireframe={props.wireframe}
                 color={hovered ? "hotpink" : "orange"}
-            />
+            /> */}
+            <meshNormalMaterial attach="material" />
         </mesh>
     );
 };
